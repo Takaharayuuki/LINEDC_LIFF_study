@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import liff from "@line/liff";
 import "./App.css";
 
@@ -9,7 +9,9 @@ function App() {
     details: "",
   });
 
-  const handleChange = (e: any) => {
+  const handleChange: ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
