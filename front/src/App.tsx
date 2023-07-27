@@ -1,6 +1,7 @@
 import { ChangeEventHandler, useState } from "react";
 import liff from "@line/liff";
 import "./App.css";
+import type { TextMessage } from "@line/bot-sdk";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ function App() {
 
   const onClickShare = () => {
     if (liff.isApiAvailable("shareTargetPicker")) {
-      const message: { type: "text"; text: string } = {
+      const message: TextMessage = {
         type: "text",
         text: `イベントの詳細:\n日時: ${formData.date}\n場所: ${formData.location}\n詳細: ${formData.detail} \n\n LIFF勉強会情報アカウント を友だち追加できます\nhttps://lin.ee/xoM6MwD`,
       };

@@ -826,7 +826,7 @@
     "@liff/logger" "2.22.2"
     "@liff/util" "2.22.2"
 
-"@line/bot-sdk@^7.0.0":
+"@line/bot-sdk@^7.0.0", "@line/bot-sdk@^7.5.2":
   version "7.5.2"
   resolved "https://registry.yarnpkg.com/@line/bot-sdk/-/bot-sdk-7.5.2.tgz#ecf5410e2ceda0ed491aa178c587be8f2b691ddd"
   integrity sha512-mMaDnr+mOqQDLYJcUp+fQwZklg/LoOZzNILlWdsj2IFD2nXF+HhAm3KEy5tyUx629Y2bCx6nv9Jl0UlMwBiAiw==
