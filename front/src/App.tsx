@@ -6,7 +6,7 @@ function App() {
   const [formData, setFormData] = useState({
     date: "",
     location: "",
-    details: "",
+    detail: "",
   });
 
   const handleChange: ChangeEventHandler<
@@ -20,7 +20,7 @@ function App() {
     if (liff.isApiAvailable("shareTargetPicker")) {
       const message: { type: "text"; text: string } = {
         type: "text",
-        text: `イベントの詳細:\n日時: ${formData.date}\n場所: ${formData.location}\n詳細: ${formData.details} \n\n LIFF勉強会情報アカウント を友だち追加できます\nhttps://lin.ee/xoM6MwD`,
+        text: `イベントの詳細:\n日時: ${formData.date}\n場所: ${formData.location}\n詳細: ${formData.detail} \n\n LIFF勉強会情報アカウント を友だち追加できます\nhttps://lin.ee/xoM6MwD`,
       };
 
       liff
@@ -72,8 +72,8 @@ function App() {
         <label>
           詳細:
           <textarea
-            name="details"
-            value={formData.details}
+            name="detail"
+            value={formData.detail}
             onChange={handleChange}
           />
         </label>
