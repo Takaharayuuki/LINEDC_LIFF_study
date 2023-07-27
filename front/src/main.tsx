@@ -4,7 +4,7 @@ import liff from "@line/liff";
 
 const initializeLiff = async () => {
   await liff.init({ liffId: import.meta.env.VITE_LIFF_ID || "" });
-  // 外部ブラウザ対応　外部ブラウザで開いた場合は、ログインを促す
+  // 外部ブラウザ対応 外部ブラウザで開いた場合は、ログインを促す
   if (!liff.isLoggedIn()) {
     liff.login();
   }
