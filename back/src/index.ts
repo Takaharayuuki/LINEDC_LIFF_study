@@ -12,18 +12,24 @@ app.use((req, res, next) => {
   next();
 });
 
-// body-parserに基づいた着信リクエストの解析
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const router = express.Router();
 
-router.post('/api/test', (req: Request, res: Response) => {
+// POST /message
+router.post('/message', (req: Request, res: Response) => {
+  // pushMessageを実施する
   res.send(req.body);
 });
-app.use(router);
 
-// 3000番ポートでAPIサーバ起動
+// POST /webhook
+router.post('/webhook', (req: Request, res: Response) => {
+  // webhookイベントを受け取ってオウム返しする
+  res.send(req.body);
+});
+
+app.use(router);
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
 });
