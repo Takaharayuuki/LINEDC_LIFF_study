@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
 const LINE_CHANNEL_ID = process.env.LINE_CHANNEL_ID || '';
 
@@ -26,4 +27,18 @@ export const verifyTokenAPI = async (idToken: string): Promise<string> => {
       console.error(err);
       return '';
     });
+};
+
+/**
+ * jwt-decodeを使って、idTokenを検証する
+ * @param idToken
+ * @returns
+ */
+export const verifyTokenLocal = async (idToken: string): Promise<string> => {
+  const decoded = jwt_decode<{ sub: string; aud: string }>(idToken);
+  console.log(decoded);
+  if (decoded.aud !== LINE_CHANNEL_ID) {
+    return '';
+  }
+  return decoded.sub;
 };
