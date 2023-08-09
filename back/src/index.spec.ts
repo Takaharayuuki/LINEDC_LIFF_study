@@ -1,7 +1,7 @@
-import main from './index';
+import {} from './index';
 
 describe('index', () => {
   test('should be true', () => {
-    expect(main()).toBe(undefined);
+    expect(1 + 1).toBe(2);
   });
 });

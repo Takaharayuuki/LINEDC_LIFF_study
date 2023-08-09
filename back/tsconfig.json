@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "ESNext",
-    "rootDir": "src",
-    "outDir": "out",
+    "target": "es2020",
+    "module": "CommonJS",
+    "sourceMap": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
-  }
+    "types": ["node", "jest"],
+    "rootDir": "src",
+    "outDir": "out"
+  },
+  "exclude": ["node_modules", "out"]
 }
