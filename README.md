@@ -50,4 +50,6 @@ ngrok http <vite locahost port>
 
 ## Getting Started - back
 
-TBD
+```bash
+curl -X POST http://localhost:3000/message -H "Accept: application/json" -H "Content-type: application/json" -d '{ "message" : "test" }'  | jq
+```

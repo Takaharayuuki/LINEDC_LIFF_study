@@ -1,4 +1,5 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Router } from 'express';
+import { pushMessage } from './pushMessage';
 
 const app = express();
 
@@ -15,11 +16,12 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const router = express.Router();
+const router = Router();
 
 // POST /message
-router.post('/message', (req: Request, res: Response) => {
+router.post('/message', async (req: Request, res: Response) => {
   // pushMessageを実施する
+  await pushMessage('dummy', req.body.message);
   res.send(req.body);
 });
 

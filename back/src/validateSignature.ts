@@ -1,7 +1,6 @@
 import { validateSignature } from '@line/bot-sdk';
 import crypto from 'crypto';
-
-const LINE_CHANNEL_SECRET = process.env.LINE_CHANNEL_SECRET || '';
+import { config } from './config';
 
 /**
  * LINE SDKを使って、signatureを検証する
@@ -13,7 +12,7 @@ export const validateSignatureSDK = (
   body: string,
   signature: string
 ): boolean => {
-  return validateSignature(body, LINE_CHANNEL_SECRET, signature);
+  return validateSignature(body, config.channelSecret, signature);
 };
 
 /**
@@ -24,7 +23,7 @@ export const validateSignatureSDK = (
 export const generateSignature = (body: string): string => {
   // https://developers.line.biz/ja/reference/messaging-api/#signature-validation
   return crypto
-    .createHmac('SHA256', LINE_CHANNEL_SECRET)
+    .createHmac('SHA256', config.channelSecret)
     .update(body)
     .digest('base64');
 };
