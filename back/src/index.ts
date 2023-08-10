@@ -35,20 +35,23 @@ router.post('/message', async (req: Request, res: Response) => {
 });
 
 // POST /webhook
-router.post('/webhook', (req: Request, res: Response) => {
+router.post('/webhook', async (req: Request, res: Response) => {
   // webhookイベントを受け取ってリプライする
   const signature = req.headers['x-line-signature'] as string;
-  if (validateSignatureSDK(req.body, signature)) {
+
+  if (validateSignatureSDK(JSON.stringify(req.body), signature)) {
     console.log('signature validation ok');
   } else {
     console.log('signature validation ng');
   }
 
-  const event = req.body as WebhookEvent;
-  if (event.type === 'message' && event.message.type === 'text') {
-    const sendMessage = `あなたは「${event.message.text}」だから参加してくれたんだね!ありがとう!`;
-    replyMessage(event.replyToken, sendMessage);
-  }
+  const events = req.body.events as WebhookEvent[];
+  events.forEach(async (event) => {
+    if (event.type === 'message' && event.message.type === 'text') {
+      const sendMessage = `あなたは「${event.message.text}」だから参加してくれたんだね!ありがとう!`;
+      await replyMessage(event.replyToken, sendMessage);
+    }
+  });
   res.status(200).send({ status: 'OK' });
 });
 
