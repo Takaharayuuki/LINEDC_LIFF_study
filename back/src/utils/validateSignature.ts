@@ -1,6 +1,6 @@
 import { validateSignature } from '@line/bot-sdk';
 import crypto from 'crypto';
-import { config } from './config';
+import { config } from '../config';
 
 /**
  * LINE SDKを使って、signatureを検証する

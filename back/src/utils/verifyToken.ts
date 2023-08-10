@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { config } from './config';
+import { config } from '../config';
 
 /**
  * LINEが提供しているAPIを使って、idTokenを検証する

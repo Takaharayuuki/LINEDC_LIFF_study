@@ -1,8 +1,8 @@
 import { WebhookEvent } from '@line/bot-sdk';
 import express, { Request, Response, Router } from 'express';
 import { pushMessage, replyMessage } from './clients/line';
-import { validateSignatureSDK } from './validateSignature';
-import { verifyTokenAPI } from './verifyToken';
+import { validateSignatureSDK } from './utils/validateSignature';
+import { verifyTokenAPI } from './utils/verifyToken';
 
 const app = express();
 
@@ -43,6 +43,7 @@ router.post('/webhook', async (req: Request, res: Response) => {
     console.log('signature validation ok');
   } else {
     console.log('signature validation ng');
+    res.status(403).send({ status: 'NG' });
   }
 
   const events = req.body.events as WebhookEvent[];
