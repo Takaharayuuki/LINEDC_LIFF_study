@@ -1,17 +1,16 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-
-const LINE_CHANNEL_ID = process.env.LINE_CHANNEL_ID || '';
+import { config } from '../config';
 
 /**
  * LINEが提供しているAPIを使って、idTokenを検証する
- * @param idToken
+ * @param idToken a string of idToken
  * @returns
  */
 export const verifyTokenAPI = async (idToken: string): Promise<string> => {
   const params = new URLSearchParams();
   params.append('id_token', idToken);
-  params.append('client_id', LINE_CHANNEL_ID);
+  params.append('client_id', config.channelId);
   return await axios
     .post('https://api.line.me/oauth2/v2.1/verify', params, {
       headers: {
@@ -31,13 +30,13 @@ export const verifyTokenAPI = async (idToken: string): Promise<string> => {
 
 /**
  * jwt-decodeを使って、idTokenを検証する
- * @param idToken
+ * @param idToken a string of idToken
  * @returns
  */
 export const verifyTokenLocal = async (idToken: string): Promise<string> => {
   const decoded = jwt_decode<{ sub: string; aud: string }>(idToken);
   console.log(decoded);
-  if (decoded.aud !== LINE_CHANNEL_ID) {
+  if (decoded.aud !== config.channelId) {
     return '';
   }
   return decoded.sub;

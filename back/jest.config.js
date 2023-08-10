@@ -4,4 +4,5 @@ module.exports = {
     '^.+\\.(ts|tsx)$': ['ts-jest', { tsConfig: 'tsconfig.json' }],
   },
   testMatch: ['**/*.spec.(ts|tsx)'],
+  globalSetup: './src/setupTests.ts',
 };

@@ -1,4 +1,8 @@
-import express, { Request, Response } from 'express';
+import { WebhookEvent } from '@line/bot-sdk';
+import express, { Request, Response, Router } from 'express';
+import { pushMessage, replyMessage } from './clients/line';
+import { validateSignatureSDK } from './utils/validateSignature';
+import { verifyTokenAPI } from './utils/verifyToken';
 
 const app = express();
 
@@ -15,21 +19,44 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const router = express.Router();
+const router = Router();
 
 // POST /message
-router.post('/message', (req: Request, res: Response) => {
+interface MessageBody {
+  message: string;
+  id_token: string;
+}
+router.post('/message', async (req: Request, res: Response) => {
   // pushMessageを実施する
-  res.send(req.body);
+  const body: MessageBody = req.body as MessageBody;
+  const userId = await verifyTokenAPI(body.id_token);
+  await pushMessage(userId, body.message);
+  res.status(200).send({ status: 'OK' });
 });
 
 // POST /webhook
-router.post('/webhook', (req: Request, res: Response) => {
-  // webhookイベントを受け取ってオウム返しする
-  res.send(req.body);
+router.post('/webhook', async (req: Request, res: Response) => {
+  // webhookイベントを受け取ってリプライする
+  const signature = req.headers['x-line-signature'] as string;
+
+  if (validateSignatureSDK(JSON.stringify(req.body), signature)) {
+    console.log('signature validation ok');
+  } else {
+    console.log('signature validation ng');
+    res.status(403).send({ status: 'NG' });
+  }
+
+  const events = req.body.events as WebhookEvent[];
+  events.forEach(async (event) => {
+    if (event.type === 'message' && event.message.type === 'text') {
+      const sendMessage = `あなたは「${event.message.text}」だから参加してくれたんだね!ありがとう!`;
+      await replyMessage(event.replyToken, sendMessage);
+    }
+  });
+  res.status(200).send({ status: 'OK' });
 });
 
 app.use(router);
 app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+  console.log('listening on port 3000!');
 });
