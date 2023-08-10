@@ -50,6 +50,17 @@ ngrok http <vite locahost port>
 
 ## Getting Started - back
 
-```bash
-curl -X POST http://localhost:3000/message -H "Accept: application/json" -H "Content-type: application/json" -d '{ "message" : "test" }'  | jq
+- `.env.sample`をコピーして`.env`を作成し、LIFF ID を入力してください。
+
+```bash:
+cd back
+
+cp -pr .env.sample .env
+```
+
+- その後依存パッケージをインストールして、ローカルサーバーを起動します。
+
+```bash:
+yarn install
+yarn dev
 ```
