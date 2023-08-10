@@ -5,8 +5,8 @@ const LINE_CHANNEL_SECRET = process.env.LINE_CHANNEL_SECRET || '';
 
 /**
  * LINE SDKを使って、signatureを検証する
- * @param body
- * @param signature
+ * @param body a request body string
+ * @param signature a string of X-Line-Signature header
  * @returns
  */
 export const validateSignatureSDK = (
@@ -18,8 +18,7 @@ export const validateSignatureSDK = (
 
 /**
  * signature生成
- * @param body
- * @param signature
+ * @param body a request body string
  * @returns
  */
 export const generateSignature = (body: string): string => {
@@ -32,8 +31,8 @@ export const generateSignature = (body: string): string => {
 
 /**
  * 自前でsignatureを検証する
- * @param body
- * @param signature
+ * @param body a request body string
+ * @param signature a string of X-Line-Signature header
  * @returns
  */
 export const validateSignatureLocal = (

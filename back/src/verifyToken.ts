@@ -5,7 +5,7 @@ const LINE_CHANNEL_ID = process.env.LINE_CHANNEL_ID || '';
 
 /**
  * LINEが提供しているAPIを使って、idTokenを検証する
- * @param idToken
+ * @param idToken a string of idToken
  * @returns
  */
 export const verifyTokenAPI = async (idToken: string): Promise<string> => {
@@ -31,7 +31,7 @@ export const verifyTokenAPI = async (idToken: string): Promise<string> => {
 
 /**
  * jwt-decodeを使って、idTokenを検証する
- * @param idToken
+ * @param idToken a string of idToken
  * @returns
  */
 export const verifyTokenLocal = async (idToken: string): Promise<string> => {
