@@ -1,0 +1,73 @@
+/* 全体のスタイル */
+.questionnaire {
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+  color: #343a40;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+/* タイトルのスタイル */
+.questionnaire-title {
+  color: #495057;
+  text-align: center;
+  padding-top: 60px;
+  margin-bottom: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+/* コンテナのスタイル */
+.questionnaire-container {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ラベルのスタイル */
+.questionnaire-label {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 入力フィールドのスタイル */
+.questionnaire-input {
+  width: 95%;
+  padding: 12px 15px;
+  margin-bottom: 30px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.questionnaire-input:focus {
+  border-color: #495057;
+  outline: none;
+}
+
+/* ボタンのスタイル */
+.questionnaire-button {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.questionnaire-button:hover {
+  background-color: #0056b3;
+}
