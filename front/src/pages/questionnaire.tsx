@@ -40,6 +40,7 @@ function Questionnaire() {
         )
         .then(function (response) {
           console.log(response);
+          liff.closeWindow();
         })
         .catch(function (error) {
           console.log(error);
