@@ -27,10 +27,11 @@ interface MessageBody {
   id_token: string;
 }
 router.post('/message', async (req: Request, res: Response) => {
-  // pushMessageを実施する
+  // アンケートの回答結果を元にpushMessageを実施する
   const body: MessageBody = req.body as MessageBody;
   const userId = await verifyTokenAPI(body.id_token);
-  await pushMessage(userId, body.message);
+  const sendMessage = `あなたは「${body.message}」だから参加してくれたんだね!ありがとう!`;
+  await pushMessage(userId, sendMessage);
   res.status(200).send({ status: 'OK' });
 });
 
@@ -53,20 +54,6 @@ router.post('/webhook', async (req: Request, res: Response) => {
       await replyMessage(event.replyToken, sendMessage);
     }
   });
-  res.status(200).send({ status: 'OK' });
-});
-
-// POST /post-answer
-interface MessageBody {
-  message: string;
-  id_token: string;
-}
-router.post('/post-answer', async (req: Request, res: Response) => {
-  // アンケートの回答結果を元にpushMessageを実施する
-  const body: MessageBody = req.body as MessageBody;
-  const userId = await verifyTokenAPI(body.id_token);
-  const sendMessage = `あなたは「${body.message}」だから参加してくれたんだね!ありがとう!`;
-  await pushMessage(userId, sendMessage);
   res.status(200).send({ status: 'OK' });
 });
 
