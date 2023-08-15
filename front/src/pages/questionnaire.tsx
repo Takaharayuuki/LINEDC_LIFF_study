@@ -25,19 +25,10 @@ function Questionnaire() {
   const onSubmit = () => {
     if (idToken !== null) {
       axios
-        .post(
-          ENV.API_URL + "/post-answer",
-          {
-            message: message,
-            id_token: idToken,
-          },
-          {
-            headers: {
-              "Bypass-Tunnel-Reminder": "any-value",
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        )
+        .post(ENV.API_URL + "/message", {
+          message: message,
+          id_token: idToken,
+        })
         .then(function (response) {
           console.log(response);
           liff.closeWindow();
