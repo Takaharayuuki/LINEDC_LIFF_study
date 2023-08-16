@@ -12,10 +12,7 @@ function Home() {
   }>();
 
   useEffect(() => {
-    liff
-      .init({
-        liffId: import.meta.env.VITE_LIFF_ID,
-      })
+    liff.ready
       .then(() => {
         setMessage("LIFF init succeeded.");
       })
