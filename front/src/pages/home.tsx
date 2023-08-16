@@ -36,14 +36,19 @@ function Home() {
       {message && <p>{message}</p>}
       {profile && (
         <>
-          <ul>
-            <li>userId: {profile.userId}</li>
-            <li>displayName: {profile.displayName}</li>
-            <li>
-              <img src={profile.pictureUrl} width={100} />
-            </li>
-            <li>statusMessage: {profile.statusMessage}</li>
-          </ul>
+          <p>
+            userId: {profile.userId}
+            <br />
+            displayName: {profile.displayName}
+            <br />
+            <img src={profile.pictureUrl} width={100} />
+            <br />
+            statusMessage: {profile.statusMessage}
+            <br />
+            <a href="/questionnaire">Questionnaire</a>
+            <br />
+            <a href="/share"> Share</a>
+          </p>
         </>
       )}
       {error && (
