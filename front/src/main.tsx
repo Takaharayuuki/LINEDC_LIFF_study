@@ -4,10 +4,16 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
 const initializeLiff = async () => {
-  await liff.init({
-    liffId: import.meta.env.VITE_LIFF_ID || "",
-    withLoginOnExternalBrowser: true,
-  });
+  await liff
+    .init({
+      liffId: import.meta.env.VITE_LIFF_ID || "",
+      withLoginOnExternalBrowser: true,
+    })
+    .then(() => {
+      if (!liff.isLoggedIn() && !liff.isInClient()) {
+        liff.login();
+      }
+    });
 };
 
 const renderApp = () => {
