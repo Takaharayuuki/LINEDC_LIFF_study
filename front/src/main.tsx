@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import liff from "@line/liff";
+import { BrowserRouter } from "react-router-dom";
 
 const initializeLiff = async () => {
   await liff.init({ liffId: import.meta.env.VITE_LIFF_ID || "" });
@@ -14,7 +15,11 @@ const renderApp = () => {
   const container = document.getElementById("root");
   if (container) {
     const root = createRoot(container);
-    root.render(<App />);
+    root.render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
   }
 };
 

@@ -27,10 +27,11 @@ interface MessageBody {
   id_token: string;
 }
 router.post('/message', async (req: Request, res: Response) => {
-  // pushMessageを実施する
+  // アンケートの回答結果を元にpushMessageを実施する
   const body: MessageBody = req.body as MessageBody;
   const userId = await verifyTokenAPI(body.id_token);
-  await pushMessage(userId, body.message);
+  const sendMessage = `あなたは「${body.message}」だから参加してくれたんだね!ありがとう!`;
+  await pushMessage(userId, sendMessage);
   res.status(200).send({ status: 'OK' });
 });
 
