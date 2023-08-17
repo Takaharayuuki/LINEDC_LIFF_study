@@ -18,19 +18,16 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            front/node_modules
-            back/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('front/yarn.lock') }}-${{ hashFiles('back/yarn.lock') }}
+            ./front/node_modules
+            ./back/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./front/yarn.lock') }}-${{ hashFiles('./back/yarn.lock') }}
       - name: yarn install
         run: |
-          cd front && yarn install
-          cd back && yarn install
+          cd ./front && yarn install
+          cd ./back && yarn install
   ci-backend:
     runs-on: ubuntu-latest
     needs: prepare
-    defaults:
-      run:
-        working-directory: ./back
     strategy:
       matrix:
         target: ["lint", "test", "build"]
@@ -45,16 +42,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            front/node_modules
-            back/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('front/yarn.lock') }}-${{ hashFiles('back/yarn.lock') }}
+            ./front/node_modules
+            ./back/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./front/yarn.lock') }}-${{ hashFiles('./back/yarn.lock') }}
       - run: yarn ${{ matrix.target }}
+        working-directory: ./back
   ci-frontend:
     runs-on: ubuntu-latest
     needs: prepare
-    defaults:
-      run:
-        working-directory: ./front
     strategy:
       matrix:
         target: ["lint", "build"]
@@ -69,7 +64,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            front/node_modules
-            back/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('front/yarn.lock') }}-${{ hashFiles('back/yarn.lock') }}
+            ./front/node_modules
+            ./back/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./front/yarn.lock') }}-${{ hashFiles('./back/yarn.lock') }}
       - run: yarn ${{ matrix.target }}
+        working-directory: ./front
