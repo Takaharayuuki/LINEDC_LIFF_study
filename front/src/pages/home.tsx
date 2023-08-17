@@ -1,9 +1,9 @@
-import liff from "@line/liff";
-import { useEffect, useState } from "react";
+import liff from '@line/liff';
+import { useEffect, useState } from 'react';
 
 function Home() {
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   const [profile, setProfile] = useState<{
     userId: string;
     displayName: string;
@@ -14,10 +14,10 @@ function Home() {
   useEffect(() => {
     liff.ready
       .then(() => {
-        setMessage("LIFF init succeeded.");
+        setMessage('LIFF init succeeded.');
       })
       .catch((e: Error) => {
-        setMessage("LIFF init failed.");
+        setMessage('LIFF init failed.');
         setError(`${e}`);
       });
     (async () => {

@@ -1,12 +1,12 @@
-import type { TextMessage } from "@line/bot-sdk";
-import { ChangeEventHandler, useState } from "react";
-import liff from "@line/liff";
+import type { TextMessage } from '@line/bot-sdk';
+import liff from '@line/liff';
+import { ChangeEventHandler, useState } from 'react';
 
 function Share() {
   const [formData, setFormData] = useState({
-    date: "",
-    location: "",
-    detail: "",
+    date: '',
+    location: '',
+    detail: '',
   });
 
   const handleChange: ChangeEventHandler<
@@ -17,9 +17,9 @@ function Share() {
   };
 
   const onClickShare = () => {
-    if (liff.isApiAvailable("shareTargetPicker")) {
+    if (liff.isApiAvailable('shareTargetPicker')) {
       const message: TextMessage = {
-        type: "text",
+        type: 'text',
         text: `イベントの詳細:\n日時: ${formData.date}\n場所: ${formData.location}\n詳細: ${formData.detail} \n\n LIFF勉強会情報アカウント を友だち追加できます\nhttps://lin.ee/xoM6MwD`,
       };
 
@@ -38,9 +38,9 @@ function Share() {
 
   const ERROR_MESSAGE = {
     SHARE_TARGET_PICKER:
-      "シェアターゲットピッカーの起動に失敗しました。少し時間をおいてから再度お試しください。",
+      'シェアターゲットピッカーの起動に失敗しました。少し時間をおいてから再度お試しください。',
     DEVICE_NOT_SUPPORTED:
-      "申し訳ありませんが、このデバイスでは「シェアターゲットピッカー」が利用できません。他の方法で共有をお試しください。",
+      '申し訳ありませんが、このデバイスでは「シェアターゲットピッカー」が利用できません。他の方法で共有をお試しください。',
   };
 
   return (
