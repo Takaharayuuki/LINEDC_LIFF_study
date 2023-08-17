@@ -1,14 +1,19 @@
-import { createRoot } from "react-dom/client";
-import App from "./App";
 import liff from "@line/liff";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import App from "./App";
 
 const initializeLiff = async () => {
-  await liff.init({ liffId: import.meta.env.VITE_LIFF_ID || "" });
-  // 外部ブラウザ対応 外部ブラウザで開いた場合は、ログインを促す
-  if (!liff.isLoggedIn()) {
-    liff.login();
-  }
+  await liff
+    .init({
+      liffId: import.meta.env.VITE_LIFF_ID || "",
+      withLoginOnExternalBrowser: true,
+    })
+    .then(() => {
+      if (!liff.isLoggedIn() && !liff.isInClient()) {
+        liff.login();
+      }
+    });
 };
 
 const renderApp = () => {
