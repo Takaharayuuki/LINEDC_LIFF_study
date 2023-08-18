@@ -1,12 +1,12 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
-import axios from "axios";
-import liff from "@line/liff";
-import { ENV } from "../config";
-import "../styles/questionnaire.css";
+import liff from '@line/liff';
+import axios from 'axios';
+import { ChangeEventHandler, useEffect, useState } from 'react';
+import { ENV } from '../config';
+import '../styles/questionnaire.css';
 
 function Questionnaire() {
-  const [message, setMessage] = useState("");
-  const [idToken, setIdtoken] = useState<string | null>("");
+  const [message, setMessage] = useState('');
+  const [idToken, setIdtoken] = useState<string | null>('');
 
   useEffect(() => {
     const token = liff.getIDToken();
@@ -25,7 +25,7 @@ function Questionnaire() {
   const onSubmit = () => {
     if (idToken !== null) {
       axios
-        .post(ENV.API_URL + "/message", {
+        .post(ENV.API_URL + '/message', {
           message: message,
           id_token: idToken,
         })
@@ -37,7 +37,7 @@ function Questionnaire() {
           console.log(error);
         });
     } else {
-      console.error("ID token is null.");
+      console.error('ID token is null.');
     }
   };
 

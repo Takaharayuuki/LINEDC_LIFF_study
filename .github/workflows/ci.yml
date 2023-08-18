@@ -12,22 +12,24 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: yarn
-      - name: Cache node modules for back
-        id: cache-back
+      - name: Cache node modules
+        id: cache-yarn
         uses: actions/cache@v3
         with:
-          path: "back/node_modules"
-          key: cache-node-modules-${{ hashFiles('back/yarn.lock') }}
-      - name: yarn install
-        run: |
-          cd back && yarn install
+          path: |
+            ./front/node_modules
+            ./back/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./front/yarn.lock') }}-${{ hashFiles('./back/yarn.lock') }}
+      - name: yarn install front
+        run: yarn install
+        working-directory: ./front
+      - name: yarn install back
+        run: yarn install
+        working-directory: ./back
+
   ci-backend:
     runs-on: ubuntu-latest
     needs: prepare
-    defaults:
-      run:
-        working-directory: ./back
     strategy:
       matrix:
         target: ["lint", "test", "build"]
@@ -36,11 +38,34 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: yarn
-      - name: Cache node modules for back
-        id: cache-back
+      - name: Cache node modules
+        id: cache-yarn
         uses: actions/cache@v3
         with:
-          path: "back/node_modules"
-          key: cache-node-modules-${{ hashFiles('back/yarn.lock') }}
+          path: |
+            ./front/node_modules
+            ./back/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./front/yarn.lock') }}-${{ hashFiles('./back/yarn.lock') }}
       - run: yarn ${{ matrix.target }}
+        working-directory: ./back
+  ci-frontend:
+    runs-on: ubuntu-latest
+    needs: prepare
+    strategy:
+      matrix:
+        target: ["lint", "build"]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Cache node modules
+        id: cache-yarn
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./front/node_modules
+            ./back/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('./front/yarn.lock') }}-${{ hashFiles('./back/yarn.lock') }}
+      - run: yarn ${{ matrix.target }}
+        working-directory: ./front
