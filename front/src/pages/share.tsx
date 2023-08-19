@@ -1,6 +1,7 @@
 import type { TextMessage } from '@line/bot-sdk';
 import liff from '@line/liff';
 import { ChangeEventHandler, useState } from 'react';
+import '../styles/share.css';
 
 function Share() {
   const [formData, setFormData] = useState({
@@ -44,41 +45,48 @@ function Share() {
   };
 
   return (
-    <div>
-      <h2>イベント招待</h2>
-      <div>
-        <label>
-          日時:
-          <input
-            type="datetime-local"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-          />
-        </label>
+    <div className="share">
+      <div className="share-container">
+        <h2 className="share-title">イベント招待</h2>
+        <div className="input-group">
+          <label>
+            日時:
+            <input
+              className="input"
+              type="datetime-local"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className="input-group">
+          <label>
+            場所:
+            <input
+              className="input"
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className="input-group">
+          <label>
+            詳細:
+            <textarea
+              className="textarea"
+              name="detail"
+              value={formData.detail}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <button className="share-button" onClick={onClickShare}>
+          イベントを友達にシェアする
+        </button>
       </div>
-      <div>
-        <label>
-          場所:
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          詳細:
-          <textarea
-            name="detail"
-            value={formData.detail}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <button onClick={onClickShare}>イベントを友達にシェアする</button>
     </div>
   );
 }
