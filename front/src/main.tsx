@@ -1,8 +1,8 @@
-import liff from "@line/liff";
-import LIFFInspectorPlugin from "@line/liff-inspector";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
+import liff from '@line/liff';
+import LIFFInspectorPlugin from '@line/liff-inspector';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 
 liff.use(new LIFFInspectorPlugin());
 
