@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@line/liff": "2.22.2",
+    "@line/liff-inspector": "^1.0.2",
     "axios": "^1.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
