@@ -1,5 +1,6 @@
-import liff from '@line/liff';
-import { useEffect, useState } from 'react';
+import liff from "@line/liff";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [message, setMessage] = useState('');
@@ -42,9 +43,9 @@ function Home() {
             <br />
             statusMessage: {profile.statusMessage}
             <br />
-            <a href="/questionnaire">Questionnaire</a>
+            <Link to="/questionnaire">Questionnaire</Link>
             <br />
-            <a href="/share"> Share</a>
+            <Link to="/share">Share</Link>
           </p>
         </>
       )}
