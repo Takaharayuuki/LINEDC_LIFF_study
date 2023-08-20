@@ -9,11 +9,13 @@ function Questionnaire() {
   const [idToken, setIdtoken] = useState<string | null>('');
 
   useEffect(() => {
-    const token = liff.getIDToken();
-    if (token !== null) {
-      setIdtoken(token);
-    }
-  }, []);
+    liff.init({ liffId: ENV.LIFF_ID }).then(() => {
+      const token = liff.getIDToken();
+      if (token) {
+        setIdtoken(token);
+      }
+    });
+  }, [liff, liff.ready]);
 
   const handleChange: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
