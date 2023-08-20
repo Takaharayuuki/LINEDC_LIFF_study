@@ -29,6 +29,10 @@ ngrok config add-authtoken <your-auth-token>
 cd front
 
 cp -pr .env.sample .env
+
+# localの場合
+VITE_LIFF_ID=<localデバッグ用のLIFFアプリのLIFF ID>
+VITE_API_URL=http://localhost:3000
 ```
 
 - その後依存パッケージをインストールして、ローカルサーバーを起動します。
@@ -56,6 +60,12 @@ ngrok http <vite locahost port>
 cd back
 
 cp -pr .env.sample .env
+
+# .envの例
+LINE_CHANNEL_ID=<LINEログインチャネルのチャネルID>
+LINE_CHANNEL_ACCESS_TOKEN=<Messaging APIチャネルのチャネルアクセストークン>
+LINE_CHANNEL_SECRET=<Messaging APIチャネルのチャネルシークレット>
+
 ```
 
 - その後依存パッケージをインストールして、ローカルサーバーを起動します。
