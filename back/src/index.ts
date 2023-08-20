@@ -28,8 +28,16 @@ interface MessageBody {
 }
 router.post('/message', async (req: Request, res: Response) => {
   // アンケートの回答結果を元にpushMessageを実施する
+  if (!req.body.message || !req.body.id_token) {
+    console.error('message or id_token is empty');
+    return res.status(400).send({ status: 'NG' });
+  }
   const body: MessageBody = req.body as MessageBody;
   const userId = await verifyTokenAPI(body.id_token);
+  if (!userId) {
+    console.error('verifyTokenAPI failed');
+    return res.status(400).send({ status: 'NG' });
+  }
   const sendMessage = `あなたは「${body.message}」だから参加してくれたんだね!ありがとう!`;
   await pushMessage(userId, sendMessage);
   res.status(200).send({ status: 'OK' });
@@ -45,6 +53,7 @@ router.post('/webhook', async (req: Request, res: Response) => {
   } else {
     console.log('signature validation ng');
     res.status(403).send({ status: 'NG' });
+    return;
   }
 
   const events = req.body.events as WebhookEvent[];

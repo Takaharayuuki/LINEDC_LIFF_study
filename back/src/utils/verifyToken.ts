@@ -23,7 +23,7 @@ export const verifyTokenAPI = async (idToken: string): Promise<string> => {
       return res.data.sub;
     })
     .catch((err) => {
-      console.error(err);
+      console.error(err.data);
       return '';
     });
 };
