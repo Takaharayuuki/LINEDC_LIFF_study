@@ -52,6 +52,8 @@ ngrok http <vite locahost port>
 
 - 上記の設定を済ませた上で、LIFF URL にアクセスすると、LINE ログインが済んでいない場合は LINE ログインを促され、ngrok が払い出した URL にリダイレクトされる（ngrok の "You are about to visit..." のページが表示された場合は、自分の開発マシンの ngrok から払い出されたリンクであることを確認して "Visit Site" を押下して進む）。
 
+- Scope を openid, profile にしておくこと。
+
 ## Getting Started - back
 
 - `.env.sample`をコピーして`.env`を作成し、LIFF ID を入力してください。
