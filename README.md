@@ -29,6 +29,10 @@ ngrok config add-authtoken <your-auth-token>
 cd front
 
 cp -pr .env.sample .env
+
+# localの場合
+VITE_LIFF_ID=<localデバッグ用のLIFFアプリのLIFF ID>
+VITE_API_URL=http://localhost:3000
 ```
 
 - その後依存パッケージをインストールして、ローカルサーバーを起動します。
@@ -48,6 +52,8 @@ ngrok http <vite locahost port>
 
 - 上記の設定を済ませた上で、LIFF URL にアクセスすると、LINE ログインが済んでいない場合は LINE ログインを促され、ngrok が払い出した URL にリダイレクトされる（ngrok の "You are about to visit..." のページが表示された場合は、自分の開発マシンの ngrok から払い出されたリンクであることを確認して "Visit Site" を押下して進む）。
 
+- Scope を openid, profile にしておくこと。
+
 ## Getting Started - back
 
 - `.env.sample`をコピーして`.env`を作成し、LIFF ID を入力してください。
@@ -56,6 +62,12 @@ ngrok http <vite locahost port>
 cd back
 
 cp -pr .env.sample .env
+
+# .envの例
+LINE_CHANNEL_ID=<LINEログインチャネルのチャネルID>
+LINE_CHANNEL_ACCESS_TOKEN=<Messaging APIチャネルのチャネルアクセストークン>
+LINE_CHANNEL_SECRET=<Messaging APIチャネルのチャネルシークレット>
+
 ```
 
 - その後依存パッケージをインストールして、ローカルサーバーを起動します。
