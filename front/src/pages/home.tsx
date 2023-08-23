@@ -2,7 +2,7 @@ import liff from '@line/liff';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const isVisibleProfile = false;
+const isVisibleProfile = true;
 
 function Home() {
   const [message, setMessage] = useState('please wait...');
@@ -29,11 +29,11 @@ function Home() {
       pictureUrl: '',
       statusMessage: '',
     });
-    // (async () => {
-    //   const currentProfile = await liff.getProfile();
-    //   console.log(`displayName:${currentProfile.displayName}`);
-    //   setProfile(currentProfile);
-    // })();
+    (async () => {
+      const currentProfile = await liff.getProfile();
+      console.log(`displayName:${currentProfile.displayName}`);
+      setProfile(currentProfile);
+    })();
   }, [liff]);
 
   return (

@@ -13,9 +13,9 @@ const initializeLiff = async () => {
       withLoginOnExternalBrowser: true,
     })
     .then(() => {
-      // if (!liff.isLoggedIn() && !liff.isInClient()) {
-      //   liff.login();
-      // }
+      if (!liff.isLoggedIn() && !liff.isInClient()) {
+        liff.login();
+      }
     });
 };
 
