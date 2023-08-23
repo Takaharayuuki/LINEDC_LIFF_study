@@ -2,8 +2,10 @@ import liff from '@line/liff';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+const isVisibleProfile = false;
+
 function Home() {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('please wait...');
   const [error, setError] = useState('');
   const [profile, setProfile] = useState<{
     userId: string;
@@ -21,18 +23,24 @@ function Home() {
         setMessage('LIFF init failed.');
         setError(`${e}`);
       });
-    (async () => {
-      const currentProfile = await liff.getProfile();
-      console.log(currentProfile);
-      setProfile(currentProfile);
-    })();
+    setProfile({
+      userId: '',
+      displayName: '',
+      pictureUrl: '',
+      statusMessage: '',
+    });
+    // (async () => {
+    //   const currentProfile = await liff.getProfile();
+    //   console.log(`displayName:${currentProfile.displayName}`);
+    //   setProfile(currentProfile);
+    // })();
   }, [liff]);
 
   return (
     <div className="App">
       <h1>create-liff-app</h1>
       {message && <p>{message}</p>}
-      {profile && (
+      {isVisibleProfile && profile && (
         <>
           <p>
             userId: {profile.userId}
